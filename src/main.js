@@ -5,11 +5,14 @@ import axios from 'axios'
 // 导入全局样式
 import './assets/css/global.css'
 //引入elementui
-import {Pagination,Switch,Tooltip, TableColumn, Table,Button, Form,FormItem,Input,Message,Container, Header, Aside, Main, Menu, Submenu, MenuItem, Col,Row,Breadcrumb, BreadcrumbItem,Card} from 'element-ui'
+import {MessageBox, Option,Select,Dialog, Pagination,Switch,Tooltip, TableColumn, Table,Button, Form,FormItem,Input,Message,Container, Header, Aside, Main, Menu, Submenu, MenuItem, Col,Row,Breadcrumb, BreadcrumbItem,Card} from 'element-ui'
 // 导入阿里图标
 import './assets/fonts/iconfont.css'
 
 Vue.config.productionTip = false
+Vue.use(Option);
+Vue.use(Select);
+Vue.use(Dialog);
 Vue.use(Pagination);
 Vue.use(Switch);
 Vue.use(Tooltip);
@@ -33,6 +36,7 @@ Vue.use(BreadcrumbItem);
 Vue.use(Card);
 Vue.prototype.$axios=axios
 Vue.prototype.$message=Message
+Vue.prototype.$confirm=MessageBox.confirm
 //配置请求根路径
 axios.defaults.baseURL='http://127.0.0.1'
 axios.interceptors.request.use((config)=>{
