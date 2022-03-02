@@ -48,7 +48,13 @@
         ></el-table-column>
         <el-table-column prop="role_name" label="角色" min-width="80">
           <template slot-scope="scope">
-            {{ scope.row.role_name === "1" ? "管理员" : "普通用户" }}
+            {{
+              scope.row.role_name === "0"
+                ? "超级管理员"
+                : scope.row.role_name === "1"
+                ? "管理员"
+                : "普通用户"
+            }}
           </template>
         </el-table-column>
         <el-table-column prop="mg_state" label="状态" min-width="80">
@@ -89,6 +95,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="setRole(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -140,14 +147,42 @@
           </el-form-item>
           <el-form-item label="角色" prop="role_name">
             <el-select v-model="addForm.role_name" placeholder="请选择角色">
+              <el-option label="超级管理员" value="0"></el-option>
               <el-option label="管理员" value="1"></el-option>
-              <el-option label="普通用户" value="0"></el-option>
+              <el-option label="普通用户" value="2"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="addUser">确 定</el-button>
+        </span>
+      </el-dialog>
+      <el-dialog
+        title="提示"
+        :visible.sync="setRoleDialogVisible"
+        width="30%"
+        :before-close="handleClose"
+      >
+        <p>当前的用户：{{ this.addForm.username }}</p>
+        <p>
+          当前的角色：{{
+            this.addForm.role_name === "0"
+              ? "超级管理员"
+              : this.addForm.role_name === "1"
+              ? "管理员"
+              : "普通用户"
+          }}
+        </p>
+        选择新的角色：
+        <el-select v-model="selectedRoleName" placeholder="请选择角色">
+          <el-option label="超级管理员" value="0"></el-option>
+          <el-option label="管理员" value="1"></el-option>
+          <el-option label="普通用户" value="2"></el-option>
+        </el-select>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleSetRole">确 定</el-button>
         </span>
       </el-dialog>
     </el-card>
@@ -186,6 +221,8 @@ export default {
       dialogVisible: false,
       isUpdata: false,
       disabledUpdata: false,
+      setRoleDialogVisible: false,
+      selectedRoleName: "",
       // 添加用户表单数据
       addForm: {
         username: "",
@@ -230,11 +267,39 @@ export default {
     this.getUserList();
   },
   methods: {
+    // 分配角色
+    setRole(row) {
+      console.log("分配角色");
+      console.log(row);
+      this.addForm = row;
+      this.setRoleDialogVisible = true;
+    },
+    // 分配角色弹框关闭事件
+    handleClose() {
+      console.log("分配角色弹框关闭");
+      this.addForm = {};
+    },
+    // 确认分配角色
+    async handleSetRole() {
+      console.log("确认分配角色");
+      console.log(this.selectedRoleName);
+      this.addForm.role_name = this.selectedRoleName;
+      // 发情请求，改变用户角色
+      const { data: res } = await this.$axios.post("/updataUser", this.addForm);
+      console.log(res);
+      if (res.code !== 200) {
+        return this.$message.error("分配角色失败！");
+      }
+      this.$message.success("分配角色成功！");
+      this.setRoleDialogVisible = false;
+      this.getUserList(); // 刷新列表
+    },
     // dialog关闭事件
     addDialogClosed() {
       this.$refs.addFormRef.resetFields(); //清空表单
       this.isUpdata = false; // 去除更新标记
       this.addForm = {}; // 清空表单数据
+      this.disabledUpdata = false; // 取消用户名密码置灰状态
       this.getUserList(); // 刷新列表
     },
     // 添加/修改用户

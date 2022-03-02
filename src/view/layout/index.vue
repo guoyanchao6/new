@@ -3,7 +3,7 @@
     <el-container class="container">
       <el-header class="header">
         <div class="right">
-          <img src="../assets/logo.png" alt="" style="width: 50px" />
+          <img src="../../assets/logo.png" alt="" style="width: 50px" />
           <h1>Vue2 + elementUI</h1>
         </div>
         <div class="right">
@@ -97,9 +97,15 @@ export default {
           children: [
             {
               id: "0201",
+              name: "角色列表",
+              icon: "el-icon-location",
+              path: "/rolesList",
+            },
+            {
+              id: "0202",
               name: "权限列表",
               icon: "el-icon-location",
-              path: "/permissionList",
+              path: "/rightsList",
             },
           ],
         },
