@@ -8,6 +8,8 @@ import './assets/css/global.css'
 import {Tree, Tag, MessageBox, Option,Select,Dialog, Pagination,Switch,Tooltip, TableColumn, Table,Button, Form,FormItem,Input,Message,Container, Header, Aside, Main, Menu, Submenu, MenuItem, Col,Row,Breadcrumb, BreadcrumbItem,Card} from 'element-ui'
 // 导入阿里图标
 import './assets/fonts/iconfont.css'
+import ZkTable from 'vue-table-with-tree-grid'
+Vue.component(ZkTable.name, ZkTable)
 
 Vue.config.productionTip = false
 Vue.use(Tree);

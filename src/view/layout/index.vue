@@ -109,6 +109,26 @@ export default {
             },
           ],
         },
+        {
+          id: "0300",
+          name: "商品管理",
+          icon: "el-icon-location",
+          path: "/permission",
+          children: [
+            // {
+            //   id: "0301",
+            //   name: "商品列表",
+            //   icon: "el-icon-location",
+            //   path: "/rolesList",
+            // },
+            {
+              id: "0302",
+              name: "商品分类",
+              icon: "el-icon-location",
+              path: "/goodsCategories",
+            },
+          ],
+        },
       ],
     };
   },

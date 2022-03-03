@@ -6,6 +6,7 @@ import Home from '../view/home/index.vue'
 import UserList from '../view/user/UserList.vue'
 import rightsList from '../view/power/rights.vue'
 import rolesList from '../view/power/roles.vue'
+import goodsCategories from '../view/goods/cate.vue'
 
 
 
@@ -40,6 +41,10 @@ const routes = [
       {
         path:'/rolesList',
         component:rolesList,
+      },
+      {
+        path:'/goodsCategories',
+        component:goodsCategories,
       },
     ]
   },
