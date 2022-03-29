@@ -251,14 +251,14 @@ export default {
             trigger: "blur",
           },
         ],
-        email: [
-          { required: true, message: "请输入邮箱", trigger: "blur" },
-          { validator: checkEmail, trigger: "blur" },
-        ],
-        mobile: [
-          { required: true, message: "请输入电话", trigger: "blur" },
-          { validator: checkMobile, trigger: "blur" },
-        ],
+        // email: [
+        //   { required: true, message: "请输入邮箱", trigger: "blur" },
+        //   { validator: checkEmail, trigger: "blur" },
+        // ],
+        // mobile: [
+        //   { required: true, message: "请输入电话", trigger: "blur" },
+        //   { validator: checkMobile, trigger: "blur" },
+        // ],
         role_name: [{ required: true, message: "请选择角色", trigger: "blur" }],
       },
     };

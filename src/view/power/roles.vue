@@ -92,6 +92,7 @@
       width="40%"
       @close="setRightsDialogClose"
     >
+      <p>{{ defKeys }}</p>
       <el-tree
         :props="defRightProps"
         :data="rightsTree"
@@ -114,6 +115,7 @@
 export default {
   data() {
     return {
+      // 角色列表
       rolesList: [
         {
           id: "01",
@@ -476,6 +478,7 @@ export default {
         },
       ],
       setRightDialogVisible: false,
+      // 权限列表
       rightsTree: [
         // 一级权限
         {
@@ -644,8 +647,7 @@ export default {
       console.log("分配权限");
       // 获取权限列表
       // this.data=
-      this.setRightDialogVisible = true;
-      //获取当前角色的 三级权限id 并选中
+      // 获取当前角色的 三级权限id 并选中
       console.log(row);
       console.log(row.children);
       // 嵌套for循环，获取三级节点
@@ -660,10 +662,10 @@ export default {
       //   });
       // });
       // 递归获取三级节点
+      this.setRightDialogVisible = true;
       this.getLeafKeys(row, this.defKeys);
       console.log("选中及半选中的节点");
       console.log(this.defKeys);
-      console.log(this);
     },
     // 递归获取三级节点
     // node 表示当前节点
@@ -688,10 +690,13 @@ export default {
     // 分配权限弹框关闭事件
     setRightsDialogClose() {
       console.log("触发colse事件");
-      this.defKeys = [];
-      console.log("关闭后选中及半选中的节点");
       console.log(this.defKeys);
-      console.log(this);
+      console.log("关闭后清空选中及半选中的节点");
+      this.defKeys = [];
+      console.log(this.defKeys);
+      console.log(this.$refs.tree.getCheckedKeys());
+      this.$refs.tree.setCheckedKeys([]);
+      console.log(this.$refs.tree.getCheckedKeys());
     },
   },
 };

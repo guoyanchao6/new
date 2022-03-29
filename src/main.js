@@ -5,13 +5,18 @@ import axios from 'axios'
 // 导入全局样式
 import './assets/css/global.css'
 //引入elementui
-import {Tree, Tag, MessageBox, Option,Select,Dialog, Pagination,Switch,Tooltip, TableColumn, Table,Button, Form,FormItem,Input,Message,Container, Header, Aside, Main, Menu, Submenu, MenuItem, Col,Row,Breadcrumb, BreadcrumbItem,Card} from 'element-ui'
+import {Cascader,Tree, Tag, MessageBox, Option,Select,Dialog, Pagination,Switch,Tooltip, TableColumn, Table,Button, Form,FormItem,Input,Message,Container, Header, Aside, Main, Menu, Submenu, MenuItem, Col,Row,Breadcrumb, BreadcrumbItem,Card} from 'element-ui'
 // 导入阿里图标
 import './assets/fonts/iconfont.css'
+// 引入展开表格
 import ZkTable from 'vue-table-with-tree-grid'
 Vue.component(ZkTable.name, ZkTable)
+// 引入echarts
+import * as echarts from 'echarts';
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
+Vue.use(Cascader);
 Vue.use(Tree);
 Vue.use(Tag);
 Vue.use(Option);
@@ -43,6 +48,7 @@ Vue.prototype.$message=Message
 Vue.prototype.$confirm=MessageBox.confirm
 //配置请求根路径
 axios.defaults.baseURL='http://127.0.0.1'
+// 请求拦截器
 axios.interceptors.request.use((config)=>{
   config.headers.Authorization = sessionStorage.getItem('token')
   console.log(config)
