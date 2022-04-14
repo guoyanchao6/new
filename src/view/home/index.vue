@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="center">
-      <div id="bar"></div>
-      <div id="line"></div>
-      <div id="pie"></div>
-      <div id="radar"></div>
+      <div style="width: 40%; height: 50%" id="bar"></div>
+      <div style="width: 40%; height: 50%" id="line"></div>
+      <div style="width: 40%; height: 50%" id="pie"></div>
+      <div style="width: 40%; height: 50%" id="radar"></div>
     </div>
   </div>
 </template>
@@ -20,7 +20,12 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      myBar: null,
+      myline: null,
+      mypie: null,
+      myradar: null,
+    };
   },
   methods: {
     download() {
@@ -45,13 +50,8 @@ export default {
       });
     },
     drawBar() {
-      const myBar = this.$echarts.init(document.getElementById("bar"), null, {
-        width: 400,
-        height: 300,
-      }); //实例化图表
-      window.onresize = function () {
-        myChart.resize();
-      };
+      console.log("加载图表bar");
+      const myBar = this.$echarts.init(document.getElementById("bar")); //初始化图表
       let option = {
         //配置项
         title: {
@@ -74,12 +74,10 @@ export default {
         ],
       };
       myBar.setOption(option); //使用配置项
+      this.myBar = myBar; // 将echarts图表 赋值给vue实例的属性
     },
     drawLine() {
-      const myBar = this.$echarts.init(document.getElementById("line"), null, {
-        width: 400,
-        height: 300,
-      }); //实例化图表
+      const myline = this.$echarts.init(document.getElementById("line")); //实例化图表
       let option = {
         title: {
           text: "line",
@@ -98,13 +96,11 @@ export default {
           },
         ],
       };
-      myBar.setOption(option); //使用配置项
+      myline.setOption(option); //使用配置项
+      this.myline = myline;
     },
     drawPie() {
-      const myBar = this.$echarts.init(document.getElementById("pie"), null, {
-        width: 400,
-        height: 300,
-      }); //实例化图表
+      const mypie = this.$echarts.init(document.getElementById("pie")); //实例化图表
       let option = {
         title: {
           text: "pie",
@@ -125,7 +121,7 @@ export default {
           {
             name: "Nightingale Chart",
             type: "pie",
-            radius: [30, 100],
+            radius: ["30%", "80%"],
             center: ["50%", "50%"],
             roseType: "area",
             itemStyle: {
@@ -144,13 +140,11 @@ export default {
           },
         ],
       };
-      myBar.setOption(option); //使用配置项
+      mypie.setOption(option); //使用配置项
+      this.mypie = mypie;
     },
     drawRadar() {
-      const myBar = this.$echarts.init(document.getElementById("radar"), null, {
-        width: 400,
-        height: 300,
-      }); //实例化图表
+      const myradar = this.$echarts.init(document.getElementById("radar")); //实例化图表
       let option = {
         title: {
           text: "Radar",
@@ -186,7 +180,8 @@ export default {
           },
         ],
       };
-      myBar.setOption(option); //使用配置项
+      myradar.setOption(option); //使用配置项
+      this.myradar = myradar;
     },
   },
   mounted() {
@@ -194,6 +189,14 @@ export default {
     this.drawLine();
     this.drawPie();
     this.drawRadar();
+    let vm = this;
+    window.onresize = function () {
+      // BOM事件,当视口大小改变的时候触发
+      vm.myBar && vm.myBar.resize(); // 当视口改变时，重新计算图表的大小
+      vm.myline && vm.myline.resize();
+      vm.mypie && vm.mypie.resize();
+      vm.myradar && vm.myradar.resize();
+    };
   },
 };
 </script>

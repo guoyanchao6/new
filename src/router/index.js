@@ -36,7 +36,7 @@ const routes = [
       },
       {
         path:'/rightsList',
-        component:rightsList,
+        component:rightsList,  
       },
       {
         path:'/rolesList',

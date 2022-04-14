@@ -46,8 +46,8 @@ Vue.use(Card);
 Vue.prototype.$axios=axios
 Vue.prototype.$message=Message
 Vue.prototype.$confirm=MessageBox.confirm
-//配置请求根路径
-axios.defaults.baseURL='http://127.0.0.1'
+//配置请求根路径,配置完成后，发axios请求会自动拼接baseurL,axios请求的url只写接口路由即可
+axios.defaults.baseURL='http://127.0.0.1:3000'
 // 请求拦截器
 axios.interceptors.request.use((config)=>{
   config.headers.Authorization = sessionStorage.getItem('token')

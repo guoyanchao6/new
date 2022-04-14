@@ -239,7 +239,7 @@ export default {
           console.log(res.data.imgPath);
           this.showBox = false;
           // 头像上传成功，从服务器获取静态资源
-          this.avator = "http://127.0.0.1/" + res.data.imgPath;
+          this.avator = "http://127.0.0.1:3000/" + res.data.imgPath;
         }
       });
     },
@@ -283,7 +283,7 @@ export default {
           this.userInfo = res.data.userinfo;
           if (res.data.userinfo.avatar) {
             //进入页面获取用户头像
-            this.avator = "http://127.0.0.1/" + res.data.userinfo.avatar;
+            this.avator = "http://127.0.0.1:3000/" + res.data.userinfo.avatar;
           }
         } else {
           this.$message.error("获取用户信息失败");

@@ -92,7 +92,6 @@
       width="40%"
       @close="setRightsDialogClose"
     >
-      <p>{{ defKeys }}</p>
       <el-tree
         :props="defRightProps"
         :data="rightsTree"
