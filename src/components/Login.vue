@@ -37,8 +37,8 @@ export default {
     return {
       // 登录表单数据绑定对象
       loginForm: {
-        username: "ffffff",
-        password: "666666",
+        username: "aaa",
+        password: "111111",
       },
       loginFormRules: {
         username: [

@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../components/Login.vue'
-import Home from '../view/home.vue'
-import Welcome from '../view/Welcome.vue'
+import index from '../view/layout/index.vue'
+import Home from '../view/home/index.vue'
 import UserList from '../view/user/UserList.vue'
-import PermissionList from '../view/PermissionList.vue'
+import rightsList from '../view/power/rights.vue'
+import rolesList from '../view/power/roles.vue'
+import goodsCategories from '../view/goods/cate.vue'
 
 
 
@@ -20,21 +22,29 @@ const routes = [
     component:Login,
   },
   {
-    path:'/home',
-    component:Home,
-    redirect:'/welcome',
+    path:'/index',
+    component:index,
+    redirect:'/home',
     children:[
       {
-        path:'/welcome',
-        component:Welcome,
+        path:'/home',
+        component:Home,
       },
       {
         path:'/userList',
         component:UserList,
       },
       {
-        path:'/permissionList',
-        component:PermissionList,
+        path:'/rightsList',
+        component:rightsList,  
+      },
+      {
+        path:'/rolesList',
+        component:rolesList,
+      },
+      {
+        path:'/goodsCategories',
+        component:goodsCategories,
       },
     ]
   },
